@@ -4,18 +4,25 @@ import java.util.Arrays;
 
 public class Result {
 
-	int maxValue;
+	int nOfSides;
 	int[] values;
 	int[] occs;
 
-	public Result(int[] values, int maxValue) {
+	public Result(int[] values, int nOfSides) {
 		this.values = values;
-		this.maxValue = maxValue;
+		this.nOfSides = nOfSides;
 		this.getOccs();
 	}
 
+	public Result replaceDice(int diceIndex, int value) {
+		this.values[diceIndex] = value;
+		this.getOccs();
+		return this;
+	}
+	
+	
 	public String toString() {
-		return Arrays.toString(this.values);
+		return Arrays.toString(this.values)+" /// "+ Arrays.toString(this.occs);
 	}
 
 	public String occsToString() {
@@ -24,8 +31,8 @@ public class Result {
 
 	public int[] getOccs() {
 
-		int[] occ = new int[this.maxValue];
-		for (int i = 0; i < this.maxValue; i++) {
+		int[] occ = new int[this.nOfSides];
+		for (int i = 0; i < this.nOfSides; i++) {
 			occ[i] = howMany(i + 1);
 		}
 		this.occs = occ;
@@ -43,14 +50,15 @@ public class Result {
 	}
 
 	public boolean isKniffel() {
-		for (int i = 0; i < this.occs.length; i++) {
-
-			if (this.occs[i] == this.values.length) {
-				// its a kniffel
-				return true;
-			}
-		}
-		return false;
+		return this.isOfKindX(5);
+//		for (int i = 0; i < this.occs.length; i++) {
+//
+//			if (this.occs[i] == this.values.length) {
+//				// its a kniffel
+//				return true;
+//			}
+//		}
+//		return false;
 	}
 
 	public boolean isFullHouse(int x, int y) {
@@ -72,6 +80,25 @@ public class Result {
 		return false;
 	}
 
+	
+	private boolean isOfKindX(int x) {
+		for(int i=0;i<this.nOfSides;i++) {
+			if(this.occs[i]==x) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean isOfKind3() {
+		return this.isOfKindX(3);
+	}
+	
+	public boolean isOfKind4() {
+		return this.isOfKindX(4);
+	}
+	
+
 	private boolean isStreet(int x) {
 		if (streetCalc() == x) {
 			return true;
@@ -80,12 +107,12 @@ public class Result {
 		}
 	}
 
-	public boolean isSmallStreet(int x) {
-		return this.isStreet(x);
+	public boolean isSmallStreet() {
+		return this.isStreet(4);
 	}
 
-	public boolean isBigStreet(int x) {
-		return this.isStreet(x);
+	public boolean isBigStreet() {
+		return this.isStreet(5);
 	}
 
 	public int streetCalc() {
@@ -101,6 +128,9 @@ public class Result {
 		}
 		return Math.max(s, contender);
 	}
+	
+	
+
 
 	// utils
 
@@ -110,6 +140,18 @@ public class Result {
 			sum += x[i];
 		}
 		return sum;
+	}
+	
+	public int[] arrayMaxValue(int[] x) {
+		int max = 0;
+		int idx = 0;
+		for(int i=0;i<x.length;i++) {
+			if(x[i]>=max) {
+				max = x[i];
+				idx = i;
+			}
+		}
+		return new int[]{max,idx};
 	}
 
 }

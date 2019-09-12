@@ -18,6 +18,10 @@ public class Dice {
 
  }
  
+ int getSides() {
+	 return this.sides;
+ }
+ 
  int getValue() {
 	 return this.value;
  }

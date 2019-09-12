@@ -1,7 +1,5 @@
 package knifflor;
 
-import java.util.Arrays;
-
 public class Kniffel {
 
 	static Dice[] cup;
@@ -12,57 +10,97 @@ public class Kniffel {
 		int nOfDices = 5;
 		int nOfSides = 6;
 		
-		Player p = new Player();
+		Player p = new Player(new Dice(nOfSides));
 		
-		Result r = p.rollDices(nOfDices,nOfSides);
+		Result r = p.rollDices(nOfDices);
 		
-		int tries = 0;
+		
+		
 		while(!r.isKniffel()) {
-			
-			r = p.rollDices(nOfDices, nOfSides);
-			tries++;
+			r = p.rollDices(nOfDices);
 		}
 		
-		System.out.print("Got Kniffel on first throw after "+String.valueOf(tries)+" tries!");
+		AI ai = new AI();
+		
+		double p2kniffel = ai.p2kniffel(r);
+		double e4kniffel = ai.e4kniffel(r);
+		
 		System.out.println(r.toString());
-		System.out.println(r.occsToString());
-		
-		tries = 0;
-		while(!r.isFullHouse(2,3)) {
-			
-			r = p.rollDices(nOfDices, nOfSides);
-			tries++;
-		}
-		
-		System.out.print("Got FullHouse on first throw after "+String.valueOf(tries)+" tries!");
-		System.out.println(r.toString());
-		System.out.println(r.occsToString());
-		
-		tries = 0;
-		while(!r.isSmallStreet(4)) {
-			
-			r = p.rollDices(nOfDices, nOfSides);
-			tries++;
-		}
-		
-		System.out.print("Got SmallStreet on first throw after "+String.valueOf(tries)+" tries!");
-		System.out.println(r.toString());
-		System.out.println(r.occsToString());
-		
-		
-		tries = 0;
-		while(!r.isBigStreet(5)) {
-			
-			r = p.rollDices(nOfDices, nOfSides);
-			tries++;
-		}
-		
-		System.out.print("Got BigStreet on first throw after "+String.valueOf(tries)+" tries!");
-		System.out.println(r.toString());
-		System.out.println(r.occsToString());
+		System.out.println("Kniffel probability on first throw is "+Double.toString(p2kniffel)+" with "+
+		Double.toString(e4kniffel)+" expected points!");
 		
 		
 		
+//		int tries = 0;
+//		while(!r.isKniffel()) {
+//			
+//			r = p.rollDices(nOfDices);
+//			tries++;
+//		}
+//		
+//		System.out.print("Got Kniffel on first throw after "+String.valueOf(tries)+" tries!");
+//		System.out.println(r.toString());
+//		System.out.println(r.occsToString());
+//		
+//		tries = 0;
+//		while(!r.isFullHouse(2,3)) {
+//			
+//			r = p.rollDices(nOfDices);
+//			tries++;
+//		}
+//		
+//		System.out.print("Got FullHouse on first throw after "+String.valueOf(tries)+" tries!");
+//		System.out.println(r.toString());
+//		System.out.println(r.occsToString());
+//		
+//		tries = 0;
+//		while(!r.isSmallStreet()) {
+//			
+//			r = p.rollDices(nOfDices);
+//			tries++;
+//		}
+//		
+//		System.out.print("Got SmallStreet on first throw after "+String.valueOf(tries)+" tries!");
+//		System.out.println(r.toString());
+//		System.out.println(r.occsToString());
+//		
+//		
+//		tries = 0;
+//		while(!r.isBigStreet()) {
+//			
+//			r = p.rollDices(nOfDices);
+//			tries++;
+//		}
+//		
+//		System.out.print("Got BigStreet on first throw after "+String.valueOf(tries)+" tries!");
+//		System.out.println(r.toString());
+//		System.out.println(r.occsToString());
+//		
+//		
+//		
+//		tries = 0;
+//		while(!r.isOfKind3()) {
+//			
+//			r = p.rollDices(nOfDices);
+//			tries++;
+//		}
+//		
+//		System.out.print("Got 3 of a kind on first throw after "+String.valueOf(tries)+" tries!");
+//		System.out.println(r.toString());
+//		System.out.println(r.occsToString());
+//		
+//		
+//		tries = 0;
+//		while(!r.isOfKind4()) {
+//			
+//			r = p.rollDices(nOfDices);
+//			tries++;
+//		}
+//		
+//		System.out.print("Got 4 of a kind on first throw after "+String.valueOf(tries)+" tries!");
+//		System.out.println(r.toString());
+//		System.out.println(r.occsToString());
+//		
 //		int nOfDices = 10000;
 //		int nOfSides = 6;
 //		

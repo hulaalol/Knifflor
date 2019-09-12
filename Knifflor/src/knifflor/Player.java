@@ -5,18 +5,25 @@ import java.util.Arrays;
 public class Player {
 	
 	
+	public Dice dice;
 	
-	Result rollDices(int nOfDices, int nOfSides) {
+	public Player(Dice d) {
+		super();
+		this.dice = d;
+	}
+
+
+	
+	Result rollDices(int nOfDices) {
 		
 		int[] result = new int[nOfDices];
-		Dice d = new Dice(nOfSides);
 		
 		for(int i=0;i<nOfDices;i++) {
-			result[i] = d.roll();
+			result[i] = dice.roll();
 		}
 		
 		
-		return new Result(result,nOfSides);
+		return new Result(result,this.dice.getSides());
 	}
 	
 	
@@ -24,6 +31,10 @@ public class Player {
 	
 	
 	
+	Result rerollDice(Result r, int diceIndex) {
 		
-
+		return r.replaceDice(diceIndex, this.dice.roll());
+		
+		
+}
 }
