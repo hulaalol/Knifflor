@@ -1,4 +1,4 @@
-package knifflor;
+package de.hulaa.knifflor;
 
 public class Block {
 

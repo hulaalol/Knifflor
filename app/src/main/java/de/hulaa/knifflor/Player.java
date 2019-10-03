@@ -1,4 +1,4 @@
-package knifflor;
+package de.hulaa.knifflor;
 
 import java.util.Arrays;
 
